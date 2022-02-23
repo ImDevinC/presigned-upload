@@ -30,12 +30,21 @@ jobs:
           tag_name: ${{ env.RELEASE_VERSION }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
-      - name: Upload artifact
+      - name: Upload linux 64 artifact
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: presigner-${{ env.RELEASE_VERSION }}.tar.gz
-          asset_name: presigner-${{ env.RELEASE_VERSION }}.tar.gz
+          asset_path: out/presigner-${{ env.RELEASE_VERSION }}-linux-x64.tar.gz
+          asset_name: presigner-${{ env.RELEASE_VERSION }}-linux-x64.tar.gz
+          asset_content_type: application/gzip
+      - name: Upload osx x64 artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: out/presigner-${{ env.RELEASE_VERSION }}-osx-x64.tar.gz
+          asset_name: presigner-${{ env.RELEASE_VERSION }}-osx-x64.tar.gz
           asset_content_type: application/gzip
